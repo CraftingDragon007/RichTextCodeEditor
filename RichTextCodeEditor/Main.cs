@@ -7,7 +7,7 @@ namespace RichTextCodeEditor
 {
     public partial class Main : Form
     {
-        public static string openendFile;
+        public static string openendFile = "";
         public static string tempText;
         public static DialogResult result;
         public static string text;
@@ -38,7 +38,7 @@ namespace RichTextCodeEditor
             }
         }
 
-        private void Form1_Load(object sender, EventArgs e)
+        private void Main_Load(object sender, EventArgs e)
         {
             if (startParameters.Length >= 1)
             {
@@ -52,18 +52,18 @@ namespace RichTextCodeEditor
             CodeBox.Font = settings.CodeFont;
         }
 
-        private void neuToolStripMenuItem_Click(object sender, EventArgs e)
+        private void NewToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Process.Start(Application.ExecutablePath);
         }
 
-        private void öffnenToolStripMenuItem_Click(object sender, EventArgs e)
+        private void OpenToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (RichTextBoxDesigner.Text == "")
             {
                 OpenFileDialog dlg = new OpenFileDialog();
-                dlg.Title = "Datei Öffnen";
-                dlg.Filter = "GPX Text Datei (*.gpxtxt)|*.gpxtxt|Rich Text Datei (*.rtf)|*.rtf|Alle Dateien (*.*)|*.*";
+                dlg.Title = "Open File";
+                dlg.Filter = "Rich Text File (*.rtf)|*.rtf|All Files (*.*)|*.*";
                 if (dlg.ShowDialog().Equals(DialogResult.OK))
                 {
                     openendFile = dlg.FileName;
@@ -74,7 +74,7 @@ namespace RichTextCodeEditor
             }
             else
             {
-                result = MessageBox.Show("Wolllen sie ihre Änderungen speichern?", "Rich Text Code Editor", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
+                result = MessageBox.Show("Would you like to save the changes?", "Rich Text Code Editor", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
                 if (result.Equals(DialogResult.Yes))
                 {
                     try
@@ -82,8 +82,8 @@ namespace RichTextCodeEditor
                         if (openendFile.Equals(""))
                         {
                             SaveFileDialog dlg1 = new SaveFileDialog();
-                            dlg1.Title = "Datei Speichern unter";
-                            dlg1.Filter = "GPX Text Datei (*.gpxtxt)|*.gpxtxt|Rich Text Datei (*.rtf)|*.rtf";
+                            dlg1.Title = "Save file as...";
+                            dlg1.Filter = "Rich Text File (*.rtf)|*.rtf|All Files (*.*)|*.*";
                             if (dlg1.ShowDialog().Equals(DialogResult.OK))
                             {
                                 openendFile = dlg1.FileName;
@@ -98,8 +98,8 @@ namespace RichTextCodeEditor
                             tempText = RichTextBoxDesigner.Rtf;
                         }
                         OpenFileDialog dlg = new OpenFileDialog();
-                        dlg.Title = "Datei Öffnen";
-                        dlg.Filter = "GPX Text Datei (*.gpxtxt)|*.gpxtxt|Rich Text Datei (*.rtf)|*.rtf|Alle Dateien (*.*)|*.*";
+                        dlg.Title = "Open File";
+                        dlg.Filter = "Rich Text File (*.rtf)|*.rtf|All Files (*.*)|*.*";
                         if (dlg.ShowDialog().Equals(DialogResult.OK))
                         {
                             openendFile = dlg.FileName;
@@ -110,14 +110,14 @@ namespace RichTextCodeEditor
                     }
                     catch (Exception ex)
                     {
-                        MessageBox.Show("Folgender Fehler ist aufgetreten: " + ex.Message, "Rich Text Code Editor | Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                        MessageBox.Show("Following Error occured: " + ex.Message, "Rich Text Code Editor | Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                     }
                 }
                 else if (result.Equals(DialogResult.No))
                 {
                     OpenFileDialog dlg = new OpenFileDialog();
-                    dlg.Title = "Datei Öffnen";
-                    dlg.Filter = "GPX Text Datei (*.gpxtxt)|*.gpxtxt|Rich Text Datei (*.rtf)|*.rtf|Alle Dateien (*.*)|*.*";
+                    dlg.Title = "Open File";
+                    dlg.Filter = "Rich Text File (*.rtf)|*.rtf|All Files (*.*)|*.*";
                     if (dlg.ShowDialog().Equals(DialogResult.OK))
                     {
                         openendFile = dlg.FileName;
@@ -133,7 +133,7 @@ namespace RichTextCodeEditor
             }
         }
 
-        private void codeBox_TextChanged(object sender, EventArgs e)
+        private void CodeBox_TextChanged(object sender, EventArgs e)
         {
             if (!CodeBox.Text.Equals(RichTextBoxDesigner.Rtf))
             {
@@ -150,13 +150,13 @@ namespace RichTextCodeEditor
             }
         }
 
-        private void speichernToolStripMenuItem_Click(object sender, EventArgs e)
+        private void SaveToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (openendFile.Equals(""))
             {
                 SaveFileDialog dlg1 = new SaveFileDialog();
-                dlg1.Title = "Datei Speichern unter";
-                dlg1.Filter = "GPX Text Datei (*.gpxtxt)|*.gpxtxt|Rich Text Datei (*.rtf)|*.rtf";
+                dlg1.Title = "Save file as...";
+                dlg1.Filter = "Rich Text File (*.rtf)|*.rtf|All Files (*.*)|*.*";
                 if (dlg1.ShowDialog().Equals(DialogResult.OK))
                 {
                     openendFile = dlg1.FileName;
@@ -172,11 +172,11 @@ namespace RichTextCodeEditor
             }
         }
 
-        private void speichernAlsToolStripMenuItem_Click(object sender, EventArgs e)
+        private void SaveAsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             SaveFileDialog dlg1 = new SaveFileDialog();
-            dlg1.Title = "Datei Speichern unter";
-            dlg1.Filter = "GPX Text Datei (*.gpxtxt)|*.gpxtxt|Rich Text Datei (*.rtf)|*.rtf";
+            dlg1.Title = "Save file as...";
+            dlg1.Filter = "Rich Text File (*.rtf)|*.rtf|All Files (*.*)|*.*";
             if (dlg1.ShowDialog().Equals(DialogResult.OK))
             {
                 openendFile = dlg1.FileName;
@@ -186,32 +186,32 @@ namespace RichTextCodeEditor
             }
         }
 
-        private void rückgängigToolStripMenuItem_Click(object sender, EventArgs e)
+        private void UndoToolStripMenuItem_Click(object sender, EventArgs e)
         {
             RichTextBoxDesigner.Undo();
         }
 
-        private void wiederholenToolStripMenuItem_Click(object sender, EventArgs e)
+        private void RedoToolStripMenuItem_Click(object sender, EventArgs e)
         {
             RichTextBoxDesigner.Redo();
         }
 
-        private void einfügenToolStripMenuItem_Click(object sender, EventArgs e)
+        private void PasteToolStripMenuItem_Click(object sender, EventArgs e)
         {
             RichTextBoxDesigner.Paste();
         }
 
-        private void kopierenToolStripMenuItem_Click(object sender, EventArgs e)
+        private void CopyToolStripMenuItem_Click(object sender, EventArgs e)
         {
             RichTextBoxDesigner.Copy();
         }
 
-        private void ausschneidenToolStripMenuItem_Click(object sender, EventArgs e)
+        private void CutToolStripMenuItem_Click(object sender, EventArgs e)
         {
             RichTextBoxDesigner.Cut();
         }
 
-        private void schriftartToolStripMenuItem_Click(object sender, EventArgs e)
+        private void FontToolStripMenuItem_Click(object sender, EventArgs e)
         {
             FontDialog dlg = new FontDialog();
             dlg.Font = RichTextBoxDesigner.SelectionFont;
@@ -221,12 +221,12 @@ namespace RichTextCodeEditor
             }
         }
 
-        private void allesAuswählenToolStripMenuItem_Click(object sender, EventArgs e)
+        private void SelectAllToolStripMenuItem_Click(object sender, EventArgs e)
         {
             RichTextBoxDesigner.SelectAll();
         }
 
-        private void farbeToolStripMenuItem_Click(object sender, EventArgs e)
+        private void ColorToolStripMenuItem_Click(object sender, EventArgs e)
         {
             ColorDialog dlg = new ColorDialog();
             dlg.Color = RichTextBoxDesigner.SelectionColor;
@@ -236,11 +236,11 @@ namespace RichTextCodeEditor
             }
         }
 
-        private void bildEinfügenAusDateiToolStripMenuItem_Click(object sender, EventArgs e)
+        private void PasteImageOutOfFileToolStripMenuItem_Click(object sender, EventArgs e)
         {
             OpenFileDialog dlg = new OpenFileDialog();
-            dlg.Title = "Bild auswählen zum Einfügen";
-            dlg.Filter = "Bilddateien (*.BMP;*.JPG;*.GIF;*.ICO;*.PNG)|*.BMP;*.JPG;*.GIF;*.ICO;*.PNG|Alle Dateien (*.*)|*.*";
+            dlg.Title = "Select an Image to Paste";
+            dlg.Filter = "Image Files (*.BMP;*.JPG;*.GIF;*.ICO;*.PNG)|*.BMP;*.JPG;*.GIF;*.ICO;*.PNG|Alle Dateien (*.*)|*.*";
             if (dlg.ShowDialog().Equals(DialogResult.OK))
             {
                 Bitmap bmp = new Bitmap(dlg.FileName);
@@ -249,7 +249,7 @@ namespace RichTextCodeEditor
             }
         }
 
-        private void schriftartToolStripMenuItem_Click_1(object sender, EventArgs e)
+        private void FontToolStripMenuItem_Click_1(object sender, EventArgs e)
         {
             FontDialog dlg = new FontDialog();
             dlg.Font = CodeBox.Font;
@@ -259,7 +259,7 @@ namespace RichTextCodeEditor
             }
         }
 
-        private void farbeToolStripMenuItem_Click_1(object sender, EventArgs e)
+        private void ColorToolStripMenuItem_Click_1(object sender, EventArgs e)
         {
             ColorDialog dlg = new ColorDialog();
             dlg.Color = CodeBox.ForeColor;
@@ -269,7 +269,7 @@ namespace RichTextCodeEditor
             }
         }
 
-        private void hintergrundToolStripMenuItem_Click(object sender, EventArgs e)
+        private void BackgroundToolStripMenuItem_Click(object sender, EventArgs e)
         {
             ColorDialog dlg = new ColorDialog();
             dlg.Color = CodeBox.BackColor;
@@ -281,6 +281,40 @@ namespace RichTextCodeEditor
 
         private void Main_FormClosing(object sender, FormClosingEventArgs e)
         {
+            if((e.CloseReason == CloseReason.UserClosing || e.CloseReason == CloseReason.WindowsShutDown) && !saved)
+            {
+                DialogResult result = MessageBox.Show("Do you want to save your RTF Document?", "RichTextCodeEditor", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
+                switch (result)
+                {
+                    case DialogResult.Yes:
+                        if (openendFile.Equals(""))
+                        {
+                            SaveFileDialog dlg1 = new SaveFileDialog();
+                            dlg1.Title = "Save file as...";
+                            dlg1.Filter = "Rich Text File (*.rtf)|*.rtf|All Files (*.*)|*.*";
+                            if (dlg1.ShowDialog().Equals(DialogResult.OK))
+                            {
+                                openendFile = dlg1.FileName;
+                                RichTextBoxDesigner.SaveFile(dlg1.FileName, RichTextBoxStreamType.RichText);
+                                tempText = RichTextBoxDesigner.Rtf;
+                                this.Text = "Rich Text Code Editor | " + openendFile;
+                            }
+                        }
+                        else
+                        {
+                            RichTextBoxDesigner.SaveFile(openendFile, RichTextBoxStreamType.RichText);
+                            tempText = RichTextBoxDesigner.Rtf;
+                        }
+                        e.Cancel = false;
+                        break;
+                    case DialogResult.No:
+                        e.Cancel = false;
+                        break;
+                    case DialogResult.Cancel:
+                        e.Cancel = true;
+                        break;
+                }
+            }
             Properties.Settings settings = Properties.Settings.Default;
             settings.CodeBackgroundColor = CodeBox.BackColor;
             settings.CodeColor = CodeBox.ForeColor;
